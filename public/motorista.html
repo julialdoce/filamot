@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fila de Motoristas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Fila de Motoristas</h1>
+    </div>
+
+    <div class="container">
+        <!-- Tabela para exibição da fila de motoristas -->
+        <table id="tabela-fila">
+            <thead>
+                <tr>
+                    <th>Horário</th>
+                    <th>Placa</th>
+                    <th>Status</th>
+                    <th>Baia</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <!-- Mensagem para quando não há motoristas na fila -->
+        <div id="sem-motoristas" style="display: none; text-align: center; font-size: 18px; color: #555;">
+            Sem motoristas na fila.
+        </div>
+
+        <!-- Notificação e áudio -->
+        <div id="notificacao" style="display: none;" class="notificacao"></div>
+        <audio id="notificacao-audio" src="notificacao.mp3"></audio>
+    </div>
+
+    <script>
+        // Função para carregar e exibir motoristas
+        async function carregarMotoristas() {
+            try {
+                const response = await fetch('/motorista/dados');
+                const motoristas = await response.json();
+
+                const tabela = document.querySelector('#tabela-fila tbody');
+                const semMotoristasDiv = document.getElementById('sem-motoristas');
+                tabela.innerHTML = ''; // Limpa a tabela antes de adicionar os novos dados
+
+                if (motoristas.length === 0) {
+                    semMotoristasDiv.style.display = 'block'; // Exibe mensagem "Sem motoristas"
+                } else {
+                    semMotoristasDiv.style.display = 'none'; // Esconde mensagem "Sem motoristas"
+                    motoristas.forEach((motorista) => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `  
+                            <td>${motorista.horario}</td>
+                            <td>${motorista.placa}</td>
+                            <td>${motorista.status}</td>
+                            <td>${motorista.baia}</td>
+                        `;
+                        tabela.appendChild(row);
+                    });
+                }
+
+                carregarNotificacao(motoristas); // Passa os motoristas para a função de notificação
+            } catch (error) {
+                console.error('Erro ao carregar motoristas:', error);
+            }
+        }
+
+        // Função para carregar e exibir notificação
+        function carregarNotificacao(motoristas) {
+            try {
+                // Verifica se algum motorista tem o status 'descer'
+                const motoristaDescer = motoristas.find(m => m.status.toLowerCase() === 'descer');
+
+                const notificacaoDiv = document.getElementById('notificacao');
+                const notificacaoAudio = document.getElementById('notificacao-audio');
+
+                if (motoristaDescer) { // Se houver um motorista com status 'descer'
+                    notificacaoDiv.textContent = `DESCER ${motoristaDescer.placa} BAIA ${motoristaDescer.baia}`; // Exibe a mensagem da notificação
+                    notificacaoDiv.style.display = 'block'; // Torna a notificação visível
+
+                    notificacaoAudio.play(); // Reproduz o áudio da notificação
+                    mostrarNotificacao(); // Chama a função para mostrar a notificação visualmente
+                } else {
+                    notificacaoDiv.style.display = 'none'; // Se não houver motorista 'descer', esconde a notificação
+                }
+            } catch (error) {
+                console.error('Erro ao carregar notificação:', error);
+                const notificacaoDiv = document.getElementById('notificacao');
+                notificacaoDiv.textContent = 'Erro ao carregar a notificação'; // Exibe mensagem de erro
+                notificacaoDiv.style.display = 'block'; // Torna a notificação visível
+            }
+        }
+
+        // Função para exibir a notificação visualmente
+        function mostrarNotificacao() {
+            const notificacao = document.querySelector('.notificacao');
+            notificacao.classList.add('show'); // Torna a notificação visível
+            
+            // Faz a notificação desaparecer após 1 minuto
+            setTimeout(() => {
+                notificacao.classList.remove('show'); // Remove a classe 'show' após 1 minuto
+            }, 60000); // 60000ms = 1 minuto
+        }
+
+        // Atualização automática da lista de motoristas e da notificação a cada 5 segundos
+        setInterval(() => {
+            carregarMotoristas(); // Atualiza os motoristas
+        }, 5000);
+
+        // Inicializa a carga de motoristas e notificações ao carregar a página
+        document.addEventListener('DOMContentLoaded', () => {
+            carregarMotoristas(); // Carrega a primeira vez
+        });
+    </script>
+</body>
+</html>

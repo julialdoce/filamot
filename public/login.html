@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="loading-animation" style="display: none;">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUuSURWOieLUgD_a7MFol6lpGJg6nblxb7tA&s" alt="Caminhão carregando" />
+  </div>
+
+  <div class="login-container">
+    <div class="login-box">
+      <h1>Portal Mot </h1>
+      <p>Faça login</p>
+      <form id="loginForm">
+        <div class="input-group">
+          <label for="username"></label>
+          <input type="text" id="username" placeholder="Usuário" required>
+        </div>
+        <div class="input-group">
+          <label for="password"></label>
+          <input type="password" id="password" placeholder="Senha" required>
+        </div>
+        <button type="submit" class="btn">Entrar</button>
+        <p id="error-message" style="color: red; display: none;">Credenciais inválidas</p>
+      </form>
+      <p class="footer-text">Esqueceu a senha? <a href="#">Recupere aqui</a></p>
+    </div>
+  </div>
+
+  <script>
+    // Simulação de banco de dados com os dois usuários
+    const usuarios = [
+      { username: "admin", password: "admin", role: "admin" },
+      { username: "motorista", password: "motorista123", role: "motorista" }
+    ];
+
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const errorMessage = document.getElementById('error-message');
+      const loadingAnimation = document.querySelector('.loading-animation');
+
+      // Mostrar animação de carregamento
+      loadingAnimation.style.display = 'block';
+      
+      // Simular uma espera e verificar as credenciais
+      setTimeout(function () {
+        const user = usuarios.find(u => u.username === username && u.password === password);
+        
+        if (user) {
+          if (user.role === "admin") {
+            window.location.href = 'empresa.html'; // Redireciona para a página da empresa
+          } else if (user.role === "motorista") {
+            window.location.href = 'motorista.html'; // Redireciona para a página do motorista
+          }
+        } else {
+          errorMessage.style.display = 'block'; // Exibe erro caso as credenciais não sejam válidas
+        }
+        
+        // Esconder animação de carregamento após a validação
+        loadingAnimation.style.display = 'none';
+      }, 2000); // Simulando um tempo de espera de 2 segundos
+    });
+  </script>
+</body>
+</html>

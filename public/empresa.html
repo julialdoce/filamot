@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento CT</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Menu lateral -->
+    <div class="sidenav" id="menu-lateral">
+        <a href="javascript:void(0)" class="closebtn" onclick="fecharMenu()">&times;</a>
+        <a href="javascript:void(0)" onclick="abrirAgendamento()">Agendar Horário</a>
+    </div>
+    <span class="openbtn" onclick="abrirMenu()">&#9776;</span>
+
+    <!-- Cabeçalho -->
+    <div class="header">
+        <h1>Gerenciamento CT</h1>
+    </div>
+
+    <!-- Notificação de limite de motoristas -->
+    <div class="alerta-limite" id="alerta-limite" style="display: none;">
+        Limite máximo de motoristas na fila (4/4). Espere até liberar vagas.
+    </div>
+
+    <!-- Conteúdo principal -->
+    <div class="container">
+        <!-- Formulário de agendamento -->
+        <div id="menu-agendamento" style="display: none;">
+            <h2>Agendar Horário</h2>
+            <form id="form-agendamento">
+                <label for="dia">Dia:</label>
+                <input type="date" id="dia" name="dia" required>
+                <label for="horario-agendado">Horário:</label>
+                <input type="time" id="horario-agendado" name="horario-agendado" required>
+                <label for="placa-agendada">Placa:</label>
+                <input type="text" id="placa-agendada" name="placa-agendada" placeholder="AAA-1234" required>
+                <button type="submit">Salvar Agendamento</button>
+            </form>
+        </div>
+
+        <!-- Formulário para adicionar motoristas -->
+        <h2>Adicionar Motorista</h2>
+        <form id="form-adicionar">
+            <label for="agendamentos">Agendamentos:</label>
+            <select id="agendamentos" name="agendamentos"></select>
+            <label for="horario">Horário:</label>
+            <input type="time" id="horario" name="horario" required>
+            <label for="placa">Placa:</label>
+            <input type="text" id="placa" name="placa" required>
+            <label for="status">Status:</label>
+            <select id="status" name="status">
+                <option value="Na Fila">Na Fila</option>
+                <option value="Em andamento">Em andamento</option>
+                <option value="Faturado">Faturado</option>
+                <option value="Descer">Descer</option>
+                <option value="Próximo">Próximo</option>
+            </select>
+            <label for="baia">Baia:</label>
+            <select id="baia" name="baia">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            <button type="submit">Adicionar Motorista</button>
+        </form>
+
+        <!-- Tabela de motoristas -->
+        <h2>Lista de Motoristas</h2>
+        <table id="tabela-motoristas">
+            <thead>
+                <tr>
+                    <th>Horário</th>
+                    <th>Placa</th>
+                    <th>Status</th>
+                    <th>Baia</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

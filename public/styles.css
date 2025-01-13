@@ -1,0 +1,379 @@
+/* Notificação de alerta (acima do quadro de informações) */
+#notificacao {
+    background-color: #ff9800;
+    color: white;
+    padding: 15px;
+    top: 34px; /* Ajustando para 34px abaixo do topo */
+    left: 0; /* Alinhando à esquerda */
+    right: 0; /* Alinhando à direita */
+    position: fixed; /* Tornando fixo no topo */
+    z-index: 9999; /* Garantindo que a notificação fique acima de outros elementos */
+    margin: 0; /* Removendo qualquer margem */
+    border-radius: 5px;
+    font-weight: bold;
+    display: block; /* Garante que seja exibido como bloco */
+    text-align: center; /* Centraliza o conteúdo da notificação */
+    animation: blink 2s step-start infinite; /* Aumentando o tempo para 2 segundos */
+}
+
+/* Animação de piscar */
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Alterar o fundo das células */
+table tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #eaeaea;
+}
+
+/* Cor de fundo para as opções de status */
+td {
+    padding: 10px;
+    font-weight: bold;
+    text-align: center; /* Centraliza o conteúdo horizontalmente */
+    vertical-align: middle; /* Centraliza o conteúdo verticalmente */
+}
+
+td:nth-child(3) {
+    color: #431ba0;
+}
+
+td:nth-child(4) {
+    color: #007bff;
+}/* Estilo do menu lateral (à direita) */
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0; /* Menu à direita */
+    background-color: #431ba0;
+    overflow-x: hidden;
+    transition: 0.3s ease-in-out;
+    padding-top: 40px;
+    box-shadow: -4px 0 15px rgba(0, 0, 0, 0.3); /* Adicionando sombra sutil */
+    border-left: 2px solid #3a149b; /* Adicionando uma borda à esquerda para destacar o menu */
+}
+
+/* Ajustes para o botão dentro do menu lateral */
+.sidenav a {
+    padding: 15px 25px;
+    text-decoration: none;
+    font-size: 22px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+}
+
+/* Botão de fechar o menu */
+.sidenav .closebtn {
+    position: absolute;
+    top: 1px; /* Movido mais para cima */
+    right: 1px; /* Move o X para mais à direita */
+    font-size: 30px; /* Aumenta o tamanho do X */
+    color: white; /* Garante que o X seja branco */
+    cursor: pointer;
+}
+
+/* Para a abertura do menu lateral */
+.openbtn {
+    font-size: 30px; /* Aumenta o tamanho dos 3 traços */
+    cursor: pointer;
+    background-color: #431ba0;
+    color: white;
+    border: none;
+    position: absolute;
+    top: 15px;
+    right: 25px; /* Posiciona o botão de abrir menu no canto superior direito */
+}
+
+.openbtn:hover {
+    background-color: #3a149b;
+}
+
+
+/* Tabelas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 60px;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-size: 18px; /* Aumenta o tamanho da fonte para facilitar a leitura */
+    border-radius: 8px; /* Bordas arredondadas para um visual mais moderno */
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 20px 25px; /* Aumenta o espaçamento nas células */
+    text-align: center;
+    font-size: 18px; /* Ajuste para melhorar a leitura */
+}
+
+/* Estilos para cabeçalhos da tabela */
+th {
+    background-color: #431ba0;
+    color: white;
+    font-size: 20px; /* Aumenta o tamanho do texto no cabeçalho */
+    letter-spacing: 1px;
+}
+
+/* Formulários */
+form {
+    background-color: #fff;
+    padding: 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 0; /* Removendo as bordas arredondadas */
+}
+
+form input, form select, form button {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    border-radius: 5px; /* Mantendo a leve curva nos inputs e botões */
+}
+
+/* Estilos de cabeçalho */
+.header h1 {
+    background-color: #431ba0;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    margin: 0;
+    border-radius: 0; /* Removendo as bordas arredondadas */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Ajustes de layout */
+h2 {
+    color: #431ba0;
+    text-align: center;
+    margin-top: 40px;
+    font-size: 24px;
+    letter-spacing: 2px;
+}
+
+/* Ajustes no layout da fila de motoristas */
+.fila-motoristas {
+    margin-top: 60px;
+}
+
+.fila-motoristas tbody tr {
+    transition: transform 0.5s ease-in-out;
+}
+
+.fila-motoristas tbody tr.finalizado {
+    background-color: #d3ffd3;
+}
+
+.fila-motoristas tbody tr.em-andamento {
+    background-color: #ffecb3;
+}
+
+.fila-motoristas tbody tr.na-fila {
+    background-color: #ffb3b3;
+}
+
+/* Notificação de alerta (acima do quadro de informações) */
+#notificacao {
+    background-color: #ff9800;
+    color: white;
+    padding: 15px;
+    margin-top: 40px; /* Ajustando para que fique acima do quadro de informações */
+    border-radius: 5px;
+    font-weight: bold;
+    display: block; /* Garante que seja exibido como bloco */
+    text-align: center; /* Centraliza o conteúdo da notificação */
+    animation: blink 2s step-start infinite; /* Aumentando o tempo para 2 segundos */
+}
+
+/* Animação de piscar */
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+/* Estilo da página de login */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+/* Caixa de login */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4; /* Cor de fundo suave */
+}
+
+.login-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+}
+
+.login-box h1 {
+    font-size: 30px;
+    color: #431ba0;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.login-box p {
+    font-size: 14px;
+    color: #666666;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.login-box .input-group {
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.login-box .input-group label {
+    font-size: 16px;
+    color: #555555;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.login-box .input-group input {
+    width: 90%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.login-box .input-group input:focus {
+    outline: none;
+    border-color: #431ba0;
+    box-shadow: 0 0 5px rgba(67, 27, 160, 0.5);
+}
+
+.login-box .btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #431ba0;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-box .btn:hover {
+    background-color: #3a149b;
+}
+
+.login-box .footer-text {
+    font-size: 12px;
+    color: #555555;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.login-box .footer-text a {
+    color: #431ba0;
+    text-decoration: none;
+}
+
+.login-box .footer-text a:hover {
+    text-decoration: underline;
+}
+
+/* Estilo opcional para adicionar uma imagem ao lado */
+.login-container .image-section {
+    flex: 1;
+    background-image: url('https://cdn-icons-png.flaticon.com/512/4391/4391583.png'); /* Substituir pela URL da sua imagem */
+    background-size: cover;
+    background-position: center;
+}
+
+.login-container.split {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container.split .login-box {
+    flex: 1;
+    max-width: 200px;
+    margin: auto;
+}
+
+/* Estilo para a animação do caminhão */
+.loading-animation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8); /* Fundo semitransparente */
+    z-index: 9999;
+    animation: fadeOut 1s ease-in-out 2s forwards; /* Animação de desaparecimento */
+}
+
+.loading-animation img {
+    width: 80px;
+    animation: drive 2s linear infinite; /* Caminhão andando */
+}
+
+@keyframes drive {
+    0% {
+        transform: translateX(-150%);
+    }
+    50% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
