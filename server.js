@@ -72,13 +72,11 @@ app.delete('/motorista/remover/:placa', (req, res) => {
 
 // Rota inicial para verificar se o servidor está funcionando
 app.get('/', (req, res) => {
-    res.send('Servidor no Koyeb funcionando!');
-});
-
-// Rota para servir o arquivo empresa.html (substitua conforme necessário)
-app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'empresa.html'));  // Serve o arquivo empresa.html
 });
 
-// Apenas um app.listen correto
-app.listen(port, "0.0.0.0", () => console.log(`Servidor rodando na porta ${port}`)); // Corrigido com interpolação correta
+// Inicia o servidor na porta correta
+app.listen(port, "0.0.0.0", () => {
+    console.log(`Servidor rodando na porta ${port}`);
+});
+
