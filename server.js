@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000; // Permite rodar localmente ou na nuvem
 
 let motoristas = [
     { nome: "Motorista 1", status: "Na fila", baia: "Baia 1", placa: "ABC1234" },
@@ -67,4 +67,5 @@ app.delete('/motorista/remover/:placa', (req, res) => {
     res.status(200).send('Motorista removido');
 });
 
-app.listen(port, () => console.log(`Servidor rodando em http://localhost:${port}`));
+// Corrigido: Apenas um app.listen correto
+app.listen(port, "0.0.0.0", () => console.log(`Servidor rodando na porta ${port}`));
