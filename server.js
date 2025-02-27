@@ -1,14 +1,17 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const port = process.env.PORT || 3000; // Permite rodar localmente ou na nuvem
+const port = process.env.PORT || 3000; // Para rodar localmente ou no Koyeb
 
 let motoristas = [
     { nome: "Motorista 1", status: "Na fila", baia: "Baia 1", placa: "ABC1234" },
     { nome: "Motorista 2", status: "Em andamento", baia: "Baia 2", placa: "XYZ5678" }
 ];
 
+// Middleware para servir arquivos estáticos da pasta 'public'
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Middleware para tratar dados em formato JSON no corpo das requisições
 app.use(express.json());
 
 // Endpoint para obter a notificação do próximo motorista
@@ -70,6 +73,11 @@ app.delete('/motorista/remover/:placa', (req, res) => {
 // Rota inicial para verificar se o servidor está funcionando
 app.get('/', (req, res) => {
     res.send('Servidor no Koyeb funcionando!');
+});
+
+// Rota para servir o arquivo empresa.html (substitua conforme necessário)
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'empresa.html'));  // Serve o arquivo empresa.html
 });
 
 // Apenas um app.listen correto
