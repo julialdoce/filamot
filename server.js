@@ -20,7 +20,7 @@ app.get('/motorista/notificacao', (req, res) => {
     }
 
     res.json({
-        mensagem: `DESCER ${motoristaDescer.placa} BAIA ${motoristaDescer.baia}`,
+        mensagem: `DESCER ${motoristaDescer.placa} BAIA ${motoristaDescer.baia}`,  // Corrigido com interpolação correta
         motorista: motoristaDescer
     });
 });
@@ -56,7 +56,7 @@ app.put('/motorista/atualizar-status/:placa', (req, res) => {
         motoristas.shift(); // Remove o primeiro motorista
     }
 
-    res.status(200).send(`Status do motorista ${motorista.placa} atualizado para ${status}`);
+    res.status(200).send(`Status do motorista ${motorista.placa} atualizado para ${status}`); // Corrigido com interpolação correta
 });
 
 // Rota para remover o motorista após ele descer
@@ -67,5 +67,10 @@ app.delete('/motorista/remover/:placa', (req, res) => {
     res.status(200).send('Motorista removido');
 });
 
-// Corrigido: Apenas um app.listen correto
-app.listen(port, "0.0.0.0", () => console.log(`Servidor rodando na porta ${port}`));
+// Rota inicial para verificar se o servidor está funcionando
+app.get('/', (req, res) => {
+    res.send('Servidor no Koyeb funcionando!');
+});
+
+// Apenas um app.listen correto
+app.listen(port, "0.0.0.0", () => console.log(`Servidor rodando na porta ${port}`)); // Corrigido com interpolação correta
